@@ -1,0 +1,13 @@
+@use 'common';
+
+.cart-content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background: common.$bg-content;
+  height: 100vh; // view height
+  text-align: center;
+  .ant-card-body {
+    background: common.$bg-cell_table;
+  }
+}

@@ -1,0 +1,3107 @@
+$bg: paleturquoise;
+$switch-blue: #00c3e3;
+$switch-red: #ff4554;
+$switch-btn: #414548;
+$switch-btn-light: #989898;
+$switch-border-radius: 75px;
+$switch-width: 750px;
+$switch-height: 320px;
+$switch-joycon-width: 15%;
+$pane-window: $bg;
+
+$pikachu: #ffe62d;
+$pika-stripes: #5c3613;
+$pika-cheeks: #e92929;
+
+$eevee: #c5915d;
+$ev-fur: #fcf3e4;
+$ev-ears: #633c15;
+
+$tree-trunk: #df916a;
+$tree-trunk: #b97255;
+$pine-tree: #00978b;
+
+$bush: #4ec7ad;
+$bush-shadow: darken($bush, 10%);
+$flower-bush: #01796f;
+$flower: #ffffc0;
+$flower-shadow: #fff090;
+
+.wrapper-battal {
+  .signature {
+    font-family: sans-serif;
+    font-size: 16px;
+    position: absolute;
+    bottom: 28%;
+    right: 300px;
+    a {
+      text-decoration: none;
+      color: rgb(0, 137, 201);
+    }
+  }
+
+  @mixin cube($width, $height, $depth) {
+    &.front {
+      @include cubeFront($width, $height, $depth);
+    }
+    &.back {
+      @include cubeBack($width, $height, $depth);
+    }
+    &.right {
+      @include cubeRight($width, $height, $depth);
+    }
+    &.left {
+      @include cubeLeft($width, $height, $depth);
+    }
+    &.top {
+      @include cubeTop($width, $height, $depth);
+    }
+    &.bottom {
+      @include cubeBottom($width, $height, $depth);
+    }
+  }
+
+  @mixin cubeFront($width, $height, $depth) {
+    width: calc(#{$width} * 1px);
+    height: calc(#{$height} * 1px);
+    transform: translate(-50%, -50%)
+      translate3d(0, 0, calc((#{$depth} * 1px) / 2));
+  }
+
+  @mixin cubeBack($width, $height, $depth) {
+    width: calc(#{$width} * 1px);
+    height: calc(#{$height} * 1px);
+    transform: translate(-50%, -50%) rotateY(180deg)
+      translate3d(0, 0, calc((#{$depth} * 1px) / 2));
+  }
+
+  @mixin cubeRight($width, $height, $depth) {
+    width: calc(#{$depth} * 1px);
+    height: calc(#{$height} * 1px);
+    transform: translate(-50%, -50%) rotateY(90deg)
+      translate3d(0, 0, calc((#{$width} * 1px) / 2));
+  }
+
+  @mixin cubeLeft($width, $height, $depth) {
+    width: calc(#{$depth} * 1px);
+    height: calc(#{$height} * 1px);
+    transform: translate(-50%, -50%) rotateY(-90deg)
+      translate3d(0, 0, calc((#{$width} * 1px) / 2));
+  }
+
+  @mixin cubeTop($width, $height, $depth) {
+    width: calc(#{$width} * 1px);
+    height: calc(#{$depth} * 1px);
+    transform: translate(-50%, -50%) rotateX(90deg)
+      translate3d(0, 0, calc((#{$height} * 1px) / 2));
+  }
+
+  @mixin cubeBottom($width, $height, $depth) {
+    width: calc(#{$width} * 1px);
+    height: calc(#{$depth} * 1px);
+    transform: translate(-50%, -50%) rotateX(-90deg)
+      translate3d(0, 0, calc((#{$height} * 1px) / 2));
+  }
+
+  @mixin center {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: -980%;
+    top: 64%;
+  }
+
+  @mixin switch {
+    width: $switch-width;
+    height: $switch-height;
+    border-radius: $switch-border-radius;
+    display: grid;
+    grid-template-columns: $switch-joycon-width 1fr $switch-joycon-width;
+  }
+
+  @mixin button {
+    position: absolute;
+    width: 45%;
+    height: 35%;
+    background-color: $switch-btn;
+    border-radius: 100%;
+    box-shadow: inset 0 -0.0625em 0.125em rgba(black, 0.75),
+      inset 0 0.125em 0.125em -0.0625em rgba(white, 0.4),
+      0 0 0.03125em 0.0625em rgba(black, 0.6),
+      0 0.0625em 0.25em 0.03125em rgba(black, 0.5), 0.3em 0.25em 0 0.065em #333,
+      0.15em -0.005em 0 0.015em #333, 0.125em 0.2em 0 0.0125em #333,
+      0 0 0.02em 0.0625em rgba(black, 0.75),
+      0 0.375em 1em 0.0625em rgba(black, 0.4);
+    color: rgba(white, 0.5);
+    transform: scale(1.1);
+  }
+
+  @mixin joystick {
+    position: relative;
+    width: 55px;
+    height: 45px;
+    background-color: $switch-btn;
+    left: calc(50% - 19px);
+    border-radius: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0.14em 100%, 100% 0.14em, 100%;
+    background-image: linear-gradient(to bottom, #222, #111),
+      linear-gradient(to bottom, #222, #333),
+      linear-gradient(to bottom, #777, #111);
+    box-shadow: inset 0 -0.06em 0.125em black,
+      inset 0 0.125em 0.125em -0.0325em rgba(black, 0.2),
+      inset 0 0.18em 0.125em -0.0625em rgba(white, 0.3),
+      inset -0.125em 0 0.125em -0.0625em rgba(white, 0.3),
+      0 0 0.02em 0.0625em rgba(black, 0.75),
+      0 0.375em 1em 0.0625em rgba(black, 0.4);
+    transform: rotate(10deg);
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      width: 75%;
+      height: 75%;
+      border-radius: 100%;
+      left: 10%;
+      top: 8%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-image: radial-gradient(
+          ellipse 30px 30px at 20% 20%,
+          rgba(white, 0.2),
+          transparent
+        ),
+        linear-gradient(to bottom, #333, #111);
+    }
+
+    &:before {
+      width: 85%;
+      height: 85%;
+      left: 7%;
+      top: 7%;
+      background-size: 0.14em 100%, 100% 0.14em, 100%;
+      background-image: linear-gradient(to bottom, #444, #111),
+        linear-gradient(to bottom, #222, #333),
+        linear-gradient(to bottom, #222, #666);
+    }
+  }
+
+  @mixin joystick-base($shadow-color) {
+    position: absolute;
+    width: 60px;
+    height: 45px;
+    background-color: #444;
+    box-shadow: inset 0.75em 0.5em 1em black,
+      -0.125em 0 0 0.015em darken($shadow-color, 10%);
+    border-radius: 100%;
+    top: 26%;
+    left: 38%;
+    transform: rotate(10deg);
+    &:after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 30px;
+      background-color: #111;
+      border-radius: 100%;
+      left: 18%;
+      top: 16%;
+      box-shadow: inset -0.125em 0 rgba(white, 0.2),
+        -0.0125em 0.1em rgba(white, 0.2);
+    }
+  }
+  @mixin shoulder {
+    position: absolute;
+    z-index: -1;
+    top: -0.25em;
+    width: 6.5em;
+    height: 4.5em;
+    transform-style: none;
+    background-color: #414548;
+  }
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    background-color: $bg;
+    transform: scale(0.95);
+    animation: zoom 5s forwards;
+    @keyframes zoom {
+      100% {
+        transform: scale(1);
+      }
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .container {
+    width: 800px;
+    height: 800px;
+    @include center;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+
+  .switch-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-content: center;
+  }
+
+  .switch {
+    transform: rotateX(55deg) rotateZ(40deg) scale(0.8);
+    position: relative;
+    top: 200px;
+    left: 30px;
+    @include switch;
+    z-index: 3;
+    > * {
+      position: relative;
+    }
+
+    .joycon-blue > div,
+    .joycon-red > div {
+      position: relative;
+    }
+    .joycon-blue {
+      height: 100%;
+      background-color: $switch-blue;
+      box-shadow: inset 0.125em -0.125em 0.3em rgba(#444, 0.4),
+        inset -0.3em 0 0.0625em -0.25em rgba(#222, 0.5),
+        inset 0.4em 0.5em 0.5em -0.25em rgba(#fff, 0.6),
+        0.04em 0.25em 0 -0.3em #333;
+      border-top-left-radius: $switch-border-radius;
+      border-bottom-left-radius: $switch-border-radius;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 5px;
+
+      .select-btn {
+        width: 20px;
+        height: 6px;
+        background-color: $switch-btn;
+        left: 72%;
+        top: 10%;
+        border-radius: 0.0675em;
+        box-shadow: inset 0 -0.03125em 0.0625em rgba(black, 0.5),
+          inset 0 0.03125em rgba(white, 0.2),
+          0 0 0.03125em 0.03125em rgba(black, 0.5),
+          0 0.09125em 0.125em -0.03125em rgba(black, 0.4);
+      }
+
+      .joystick {
+        top: 20%;
+        .joystick-base {
+          @include joystick-base($switch-blue);
+        }
+
+        .joystick-top {
+          @include joystick();
+          height: 42px;
+          &:after {
+            height: 73%;
+            left: 10%;
+            top: 10%;
+            transform: scale(0.95);
+            box-shadow: 0.125em 0.1em 0 0.03125em rgba(black, 0.8),
+              inset 0.125em 0 rgba(black, 0.5),
+              inset 0.0125em 0.01em rgba(black, 0.8);
+          }
+        }
+      }
+
+      .button-group {
+        width: 45px;
+        height: 45px;
+        left: calc(50% - 32.5px);
+        top: 28%;
+
+        .button {
+          @include button;
+          &:after {
+            content: '';
+          }
+
+          &.up {
+            top: 0;
+            left: 50%;
+            &:after {
+              @include center;
+              border-right: 4px solid transparent;
+              border-left: 4px solid transparent;
+              border-bottom: 8px solid #222;
+            }
+          }
+          &.down {
+            top: 100%;
+            left: 50%;
+            &:after {
+              @include center;
+
+              border-right: 4px solid transparent;
+              border-left: 4px solid transparent;
+              border-top: 8px solid #222;
+            }
+          }
+          &.left {
+            top: 50%;
+            left: 0;
+            &:after {
+              @include center;
+              border-top: 4px solid transparent;
+              border-bottom: 4px solid transparent;
+              border-right: 8px solid #222;
+            }
+          }
+          &.right {
+            top: 50%;
+            left: 100%;
+            &:after {
+              @include center;
+              border-top: 4px solid transparent;
+              border-bottom: 4px solid transparent;
+              border-left: 8px solid #222;
+            }
+          }
+        }
+      }
+
+      .capture-btn {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: $switch-btn;
+        bottom: 22%;
+        left: 60%;
+        border-radius: 0.125em;
+        box-shadow: inset 0 0.25em 0.5em -0.0625em rgba(white, 0.1),
+          inset 0 0.015em 0.03125em rgba(white, 0.4),
+          inset 0 0 0.03125em 0.03125em black,
+          0 0.015em 0 0.03125em rgba(black, 0.75),
+          0 0.015em 0.05em 0.0625em rgba(black, 0.5);
+
+        &:after {
+          content: '';
+          width: 14px;
+          height: 14px;
+          position: absolute;
+          @include center;
+          border-radius: 100%;
+          background-image: linear-gradient(to bottom, #222, #333);
+          box-shadow: inset 0 0.0125em 0 0.03125em rgba(black, 0.6),
+            inset 0 -0.0125em 0 0.06125em rgba(white, 0.4),
+            0.015em -0.03125em 0.0125em rgba(black, 0.7);
+        }
+      }
+
+      .shoulder.left {
+        @include shoulder;
+        left: -0.25em;
+        border-radius: 6em 1em 0 0;
+      }
+    }
+
+    .screen {
+      background-color: $switch-btn;
+      border-radius: 10px;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      box-shadow: inset 0 -1.25em 0.5em -1em rgba(black, 0.5),
+        inset 0.125em 0 rgba(white, 0.2), inset -0.125em 0 rgba(white, 0.2);
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+      }
+
+      &:before {
+        height: 15px;
+        background-image: linear-gradient(
+          to bottom,
+          $switch-btn,
+          rgba($switch-btn-light, 0.4),
+          $switch-btn
+        );
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        box-shadow: inset 0.125em 0 rgba(white, 0.2),
+          inset -0.125em 0 rgba(white, 0.2);
+      }
+      &:after {
+        // height: 30px;
+        // top: -3%;
+        // background-repeat: no-repeat;
+        // background-size: 30px 30px;
+        // background-position: -3% 0, 103% 0;
+        // background-image: radial-gradient(10px 20px, $bg 40%, transparent 40%),
+        //   radial-gradient(10px 20px, $bg 40%, transparent 40%);
+      }
+      .battle-field {
+        @include center;
+        $dark-blue: darken($bg, 10%);
+        $alpha: 0.2;
+        box-sizing: border-box;
+        width: 93%;
+        height: 92%;
+        background-color: $bg;
+        border-top: 25px solid black;
+        border-bottom: 25px solid black;
+        border-left: 35px solid black;
+        border-right: 35px solid black;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: inset 0 0 40px rgb(0, 137, 201);
+        background-size: 375px 100%, 100px 100px, 10px 100%;
+        background-repeat: no-repeat;
+        background-position: 0 0, 50% 50%, 50% 0;
+        background-image: linear-gradient(
+            120deg,
+            transparent 20%,
+            rgba($dark-blue, $alpha) 20%,
+            25%,
+            transparent 25%,
+            30%,
+            rgba(white, $alpha) 30%,
+            40%,
+            transparent 40%,
+            rgba(darken($bg, 10%), $alpha) 40%,
+            45%,
+            rgba(white, $alpha) 45%,
+            48%,
+            transparent 48%,
+            50%,
+            rgba(white, $alpha) 50%,
+            rgba(white, $alpha) 70%,
+            rgba($dark-blue, $alpha) 70%,
+            75%,
+            transparent 75%
+          ),
+          radial-gradient(
+            circle at center,
+            $bg 20%,
+            white 20%,
+            30%,
+            transparent 30%,
+            50%,
+            white 50%,
+            60%,
+            transparent 60%
+          ),
+          linear-gradient(to bottom, white, white);
+      }
+    }
+
+    .glass-overlay {
+      @include center;
+      $dark-blue: darken($bg, 10%);
+      $alpha: 0.3;
+      box-sizing: border-box;
+      width: 93%;
+      height: 92%;
+      background-color: $bg;
+      border-top: 25px solid black;
+      border-bottom: 25px solid black;
+      border-left: 35px solid black;
+      border-right: 35px solid black;
+      border-radius: 10px;
+      overflow: hidden;
+      background-size: 420px 100%, 100px 100px, 10px 100%;
+      background-repeat: no-repeat;
+      background-position: 0 0, 50% 50%, 50% 0;
+      background-image: linear-gradient(
+        120deg,
+        transparent 20%,
+        rgba($dark-blue, $alpha) 20%,
+        25%,
+        transparent 25%,
+        30%,
+        rgba(white, $alpha) 30%,
+        40%,
+        transparent 40%,
+        rgba(darken($bg, 10%), $alpha) 40%,
+        45%,
+        rgba(white, $alpha) 45%,
+        48%,
+        transparent 48%,
+        50%,
+        rgba(white, $alpha) 50%,
+        rgba(white, $alpha) 70%,
+        rgba($dark-blue, $alpha) 70%,
+        75%,
+        transparent 75%
+      );
+    }
+
+    .joycon-red {
+      height: 100%;
+      background-color: $switch-red;
+      border-top-right-radius: $switch-border-radius;
+      border-bottom-right-radius: $switch-border-radius;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 5px;
+      box-shadow: inset -0.125em 0.125em 0.3em rgba(#444, 0.4),
+        inset 0.3em 0 0.0625em -0.25em rgba(#222, 0.5),
+        inset -0.4em 0.5em 0.5em -0.25em rgba(#fff, 0.6),
+        -0.04em 0.25em 0 -0.3em #333;
+
+      .start-btn {
+        width: 7px;
+        height: 20px;
+        background-color: $switch-btn;
+        top: 8%;
+        left: 15%;
+        box-shadow: 0 0 0.03125em rgba(black, 0.6),
+          0 0.09375em 0.125em -0.03125em rgba(black, 0.5);
+
+        &:before,
+        &:after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: $switch-btn;
+          border-radius: 0.0675em;
+        }
+
+        &:before {
+          height: 7px;
+          width: 20px;
+          box-shadow: inset 0 -0.03125em 0.0625em rgba(black, 0.5),
+            inset 0 0.03125em rgba(white, 0.2),
+            0 0 0.03125em 0.03125em rgba(black, 0.6),
+            0 0.09375em 0.125em -0.03125em rgba(black, 0.4);
+        }
+
+        &:after {
+          width: 7px;
+          height: 20px;
+          box-shadow: inset 0 -0.09375em 0.0625em -0.0624em rgba(black, 0.5),
+            inset 0 0.03125em rgba(white, 0.2);
+        }
+      }
+
+      .button-group {
+        width: 45px;
+        height: 45px;
+        left: calc(50% - 32.5px);
+        top: -3%;
+
+        .button {
+          @include button;
+          &:after {
+            font-family: 'Arial';
+            font-size: 0.7em;
+          }
+
+          &.x {
+            top: 0;
+            left: 50%;
+            &:after {
+              @include center;
+              content: 'X';
+            }
+          }
+          &.a {
+            top: 100%;
+            left: 50%;
+            &:after {
+              @include center;
+              content: 'A';
+            }
+          }
+          &.b {
+            top: 50%;
+            left: 0;
+            &:after {
+              @include center;
+              content: 'B';
+            }
+          }
+          &.y {
+            top: 50%;
+            left: 100%;
+            &:after {
+              @include center;
+              content: 'Y';
+            }
+          }
+        }
+      }
+
+      .joystick {
+        top: 40%;
+        right: 10%;
+        .joystick-base {
+          @include joystick-base($switch-red);
+        }
+
+        .joystick-top {
+          @include joystick();
+          height: 42px;
+          &:after {
+            height: 73%;
+            left: 10%;
+            top: 10%;
+            transform: scale(0.95);
+            box-shadow: 0.125em 0.1em 0 0.03125em rgba(black, 0.8),
+              inset 0.125em 0 rgba(black, 0.5),
+              inset 0.0125em 0.01em rgba(black, 0.8);
+          }
+        }
+      }
+
+      .home-btn {
+        position: absolute;
+        bottom: 22%;
+        width: 20px;
+        height: 20px;
+        left: 20%;
+        background-color: #444;
+        border-radius: 100%;
+        box-shadow: inset 0 0 0 0.09em #9b9b9b,
+          inset 0 0.25em 0.5em rgba(white, 0.2),
+          inset 0 0 0.03125em rgba(black, 1),
+          0 0.0155em 0.03125em 0.0625em rgba(black, 0.6);
+
+        &:before,
+        &:after {
+          content: '';
+          position: absolute;
+          transform: translate(-50%, -50%) scale(1.15);
+          top: 50%;
+          left: 50%;
+          display: block;
+          box-sizing: border-box;
+        }
+
+        &:before {
+          height: 6px;
+          width: 7px;
+          background-color: #444;
+          border: 0.025em solid #111;
+          box-shadow: inset 0 0 0 0.1em #111, inset 0.12em 0 0 #111,
+            inset -0.12em 0 0 #111, 0 0.0625em 0 -0.03125em rgba(white, 0.1);
+        }
+
+        &:after {
+          border-right: 5px solid transparent;
+          border-left: 5px solid transparent;
+          border-bottom: 4px solid #111;
+          top: 30%;
+        }
+      }
+
+      .shoulder.right {
+        @include shoulder;
+        right: -0.25em;
+        border-radius: 1em 6em 0 0;
+      }
+    }
+  }
+
+  .blue-support {
+    position: relative;
+    width: 20px;
+    height: 30px;
+    background-color: darken($switch-blue, 5%);
+    left: 118px;
+    bottom: 22px;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 20px;
+      background-color: $switch-btn;
+      left: 45px;
+      top: 40px;
+      z-index: 2;
+    }
+  }
+
+  .red-support {
+    position: relative;
+    width: 20px;
+    height: 30px;
+    background-color: darken($switch-red, 5%);
+    left: 485px;
+    top: 135px;
+    z-index: 2;
+    // &:after {
+    //   content: "";
+    //   position: absolute;
+    //   width: 25px;
+    //   height: 20px;
+    //   background-color: $switch-btn;
+    //   left: 45px;
+    //   top: 40px;
+    //   z-index: 2;
+    // }
+  }
+
+  .switch-base {
+    @include switch;
+    position: relative;
+    transform: rotateX(55deg) rotateZ(40deg) scale(0.8);
+
+    top: -160px;
+    left: 30px;
+    z-index: 1;
+    background-color: $switch-btn;
+    border-radius: $switch-border-radius;
+    overflow: hidden;
+    .blue-base {
+      background-color: darken($switch-blue, 5%);
+    }
+    .red-base {
+      background-color: darken($switch-red, 5%);
+    }
+  }
+
+  .pokemon-center {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 150px;
+    left: 48%;
+    z-index: 2;
+  }
+
+  .pkc-building-base {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    .pkc-building {
+      position: relative;
+      transform: rotateX(55deg) rotateZ(40deg);
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+
+      .face {
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background-color: white;
+        border: 1px solid gray;
+        @include cube(200, 100, 100);
+        &.right {
+          background-color: rgb(230, 230, 230);
+        }
+        &.bottom {
+          background-color: rgb(243, 243, 243);
+        }
+      }
+    }
+  }
+
+  .pkc-roof-base {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -50px;
+    .pkc-roof {
+      position: relative;
+      transform: rotateX(55deg) rotateZ(40deg);
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+
+      .roof {
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background-color: $switch-red;
+        @include cube(220, 110, 30);
+
+        &.right {
+          background-color: darken($switch-red, 5%);
+          background-size: 0.4em 100%;
+          background-position: 50% 0;
+          background-repeat: no-repeat;
+          background-image: linear-gradient(to right, white 99%, transparent);
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
+        }
+        &.bottom {
+          background-size: 100% 0.4em;
+          background-position: 0 50%;
+          background-repeat: no-repeat;
+          background-image: linear-gradient(to bottom, white 99%, transparent);
+          background-color: lighten($switch-red, 5%);
+        }
+      }
+    }
+  }
+
+  .pkc-windowed-roof-base {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -70px;
+    .pkc-windowed-roof {
+      position: relative;
+      transform: rotateX(55deg) rotateZ(40deg);
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+
+      .w-roof {
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background-color: $switch-red;
+        @include cube(200, 100, 25);
+
+        &.front {
+          box-shadow: inset -8px -8px darken($switch-red, 5%);
+        }
+
+        &.right {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          .window-container {
+            width: 70%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            > .window {
+              box-sizing: border-box;
+              background-color: $bg;
+              box-shadow: inset 1px 0px 5px rgb(0, 137, 201);
+              border: 3px solid $switch-btn;
+              flex: 1 1 0;
+              width: 100%;
+              height: 80%;
+            }
+          }
+        }
+        &.bottom {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .window-container {
+            width: 100%;
+            height: 70%;
+            display: flex;
+            > .window {
+              box-sizing: border-box;
+              background-color: $bg;
+              box-shadow: inset 1px 0px 5px rgb(0, 137, 201);
+              border: 3px solid $switch-btn;
+              flex: 1 1 0;
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .entrance {
+    box-sizing: border-box;
+    width: 85%;
+    height: 100%;
+    position: relative;
+    left: 5%;
+    border-left: 9px solid $switch-btn;
+    border-right: 9px solid $switch-btn;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @mixin octagon($primary-color, $secondary-color, $border-size) {
+    width: 100%;
+    background-color: $primary-color;
+    position: relative;
+    &:before,
+    &:after {
+      position: absolute;
+      content: '';
+      left: 0;
+      border-left: $border-size solid $secondary-color;
+      border-right: $border-size solid $secondary-color;
+      width: 60%;
+    }
+    &:before {
+      top: 0;
+      border-bottom: $border-size solid $primary-color;
+    }
+    &:after {
+      bottom: 0;
+      border-top: $border-size solid $primary-color;
+    }
+  }
+  .pane {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    .pane-window {
+      width: 100%;
+      height: 35%;
+      background-color: $pane-window;
+      box-sizing: border-box;
+      border-left: 5px solid $switch-btn;
+      border-right: 5px solid $switch-btn;
+      border-top: 10px solid $switch-btn;
+      border-bottom: 10px solid $switch-btn;
+      background-image: radial-gradient(transparent, 70%, darken($bg, 20%));
+    }
+    .pane-decal {
+      position: relative;
+      @include octagon($switch-red, #f3f3f3, 10px);
+      height: 40%;
+      transform-style: preserve-3d;
+      .decal {
+        transform-style: preserve-3d;
+        @include octagon(#f3f3f3, $switch-red, 10px);
+        height: 60%;
+        width: 60%;
+        transform: translate(-50%, -50%) scale(1.3);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        &:before,
+        &:after {
+          width: 34%;
+        }
+      }
+    }
+    .pane-bottom {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 24%;
+      border: 1px solid rgba($switch-btn, 0.2);
+      background-size: 1px 100%;
+      background-repeat: no-repeat;
+      background-image: linear-gradient(
+        rgba($switch-btn, 0.2),
+        rgba($switch-btn, 0.2)
+      );
+    }
+    &.left > .pane-bottom {
+      background-position-x: 30%;
+    }
+    &.right > .pane-bottom {
+      background-position-x: 70%;
+    }
+  }
+
+  .pkc-door {
+    position: absolute;
+    width: 70px;
+    height: 130px;
+    border: 1px solid rgba(#222, 0.5);
+    transform: scale(0.75);
+    left: 25px;
+    top: 55px;
+    box-sizing: border-box;
+    .door {
+      width: 100%;
+      height: 100%;
+      background-size: 100% 100%, 35px 2px, 100% 100%;
+      background-position: 0 0, 15% 60%, 0 0;
+      background-repeat: no-repeat;
+      background-image: radial-gradient(
+          18px 18px at 23px 60%,
+          $bg 30%,
+          white 30%,
+          40%,
+          transparent 40%,
+          90%,
+          white 90%,
+          99%,
+          transparent 99%
+        ),
+        linear-gradient(to bottom, white 99%, transparent 99%),
+        linear-gradient(
+          to right,
+          rgb(0, 137, 201),
+          1%,
+          $bg,
+          70%,
+          $switch-btn 70%,
+          85%,
+          #f3f3f3 85%
+        );
+    }
+    .door-bottom {
+      position: absolute;
+      bottom: -10%;
+      width: 68px;
+      height: 20%;
+      border-radius: 100%;
+      border-bottom: 1px solid rgba(#222, 0.5);
+      background-image: linear-gradient(
+        to right,
+        $bg,
+        70%,
+        $switch-btn 70%,
+        85%,
+        #f3f3f3 85%
+      );
+    }
+    .door-top {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      top: -15px;
+      > * {
+        position: absolute;
+        border: 1px solid black;
+      }
+      .dt-red {
+        background-color: $switch-red;
+        border-top-left-radius: 100%;
+        border-top-right-radius: 100%;
+        border-bottom-left-radius: 80%;
+        border-bottom-right-radius: 80%;
+        box-shadow: 0 1px black, inset -10px 5px red, inset -15px 10px white;
+        background-image: radial-gradient(
+          ellipse at 50% 18px,
+          $switch-red 70%,
+          #f3f3f3 70%
+        );
+        width: 97%;
+        height: 40px;
+        right: 1px;
+        transform: scale(1.05);
+        border-bottom: 10px solid #f3f3f3;
+      }
+    }
+  }
+
+  @function roof-box-shadow() {
+    $box-shadow: ();
+    $start-x: 2px;
+    $start-y: -5px;
+    @for $i from 1 through 15 {
+      $box-shadow: append(
+        $box-shadow,
+        unquote('#{$start-x} #{$start-y} #{darken($switch-red, 5%)}'),
+        $separator: comma
+      );
+      $start-x: $start-x + 1;
+      $start-y: $start-y - 1;
+    }
+    @return $box-shadow;
+  }
+
+  .pkc-roof-insignia {
+    $box-shadows: roof-box-shadow();
+    width: 120px;
+    height: 60px;
+    position: absolute;
+    top: -5px;
+    left: 20px;
+    background-color: $switch-red;
+    box-shadow: $box-shadows;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    transform: scale(0.5) rotate(25deg);
+    background-size: 45px 3px, 100% 100%;
+    background-position: 50% 50%, 0 0;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(
+        to right,
+        $switch-red 30%,
+        transparent 30%,
+        66%,
+        $switch-red 60%
+      ),
+      radial-gradient(
+        24px 24px at 50% 50%,
+        white 30%,
+        $switch-red 30%,
+        40%,
+        white 40%,
+        90%,
+        $switch-red 90%,
+        99%,
+        transparent 99%
+      );
+  }
+
+  .lamp {
+    position: absolute;
+    width: 100px;
+    height: 150px;
+    left: 170px;
+    top: 160px;
+    z-index: 2;
+    transform: scale(1.5);
+    &.back {
+      left: 80%;
+      top: 290px;
+
+      & > .casing > .case {
+        animation: flicker 3s 1s infinite;
+      }
+    }
+
+    .pole {
+      position: absolute;
+      width: 5px;
+      height: 70%;
+      background-color: $switch-btn;
+      bottom: 0;
+      left: 50%;
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        background-color: $switch-btn;
+        border-radius: 100%;
+      }
+      &:before {
+        width: 25px;
+        height: 8px;
+        left: -10px;
+      }
+      &:after {
+        width: 16px;
+        height: 5px;
+        top: 7px;
+        left: -6px;
+      }
+    }
+    .casing {
+      box-sizing: border-box;
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform-style: preserve-3d;
+      transform: rotateX(70deg) rotateZ(45deg);
+
+      .case {
+        $lamp-size: 16;
+        box-sizing: border-box;
+        position: absolute;
+        background-color: #fffde1;
+        box-shadow: 0px 0px 10px #fffaaf;
+        border: 3px solid $switch-btn;
+        top: -43px;
+        left: -60px;
+        @include cube($lamp-size, $lamp-size, $lamp-size);
+        animation: flicker 5s infinite;
+      }
+
+      @keyframes flicker {
+        from {
+          opacity: 1;
+        }
+
+        4% {
+          opacity: 0.9;
+        }
+
+        6% {
+          opacity: 0.85;
+        }
+
+        8% {
+          opacity: 0.95;
+        }
+
+        10% {
+          opacity: 0.9;
+        }
+
+        11% {
+          opacity: 0.922;
+        }
+
+        12% {
+          opacity: 0.9;
+        }
+
+        14% {
+          opacity: 0.95;
+        }
+
+        16% {
+          opacity: 0.98;
+        }
+
+        17% {
+          opacity: 0.9;
+        }
+
+        19% {
+          opacity: 0.93;
+        }
+
+        20% {
+          opacity: 0.99;
+        }
+
+        24% {
+          opacity: 1;
+        }
+
+        26% {
+          opacity: 0.94;
+        }
+
+        28% {
+          opacity: 0.98;
+        }
+
+        37% {
+          opacity: 0.93;
+        }
+
+        38% {
+          opacity: 0.5;
+        }
+
+        39% {
+          opacity: 0.96;
+        }
+
+        42% {
+          opacity: 1;
+        }
+
+        44% {
+          opacity: 0.97;
+        }
+
+        46% {
+          opacity: 0.94;
+        }
+
+        56% {
+          opacity: 0.9;
+        }
+
+        58% {
+          opacity: 0.9;
+        }
+
+        60% {
+          opacity: 0.99;
+        }
+
+        68% {
+          opacity: 1;
+        }
+
+        70% {
+          opacity: 0.9;
+        }
+
+        72% {
+          opacity: 0.95;
+        }
+
+        93% {
+          opacity: 0.93;
+        }
+
+        95% {
+          opacity: 0.95;
+        }
+
+        97% {
+          opacity: 0.93;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+    }
+
+    .case-rim {
+      &:before,
+      &:after {
+        content: '';
+        $border-size: 10px;
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: $border-size solid transparent;
+        border-right: $border-size solid transparent;
+        border-bottom: $border-size solid $switch-btn;
+        top: 25px;
+      }
+      &:before {
+        left: 35px;
+        transform: rotate(20deg);
+      }
+      &:after {
+        right: 30px;
+        transform: rotate(-20deg);
+      }
+    }
+
+    .case-hat {
+      width: 12px;
+      height: 12px;
+      background-color: $switch-btn;
+      position: absolute;
+      transform: rotate(45deg);
+      left: 47px;
+      top: 22px;
+    }
+    .lamp-base {
+      position: absolute;
+      width: 12px;
+      height: 20px;
+      background-color: $switch-btn;
+      bottom: 0;
+      left: 46px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        background-color: $switch-btn;
+      }
+      &:before {
+        bottom: -1px;
+        width: 25px;
+        height: 6px;
+        left: -7px;
+        border-radius: 100%;
+      }
+    }
+  }
+
+  .pokemon {
+    width: 300px;
+    height: 150px;
+    position: absolute;
+    z-index: 3;
+    left: 35%;
+    top: 40%;
+  }
+
+  .pikachu {
+    position: absolute;
+    left: 50px;
+    top: 40px;
+
+    .pika-body {
+      position: absolute;
+      width: 100%;
+      width: 60px;
+      height: 35px;
+      background-color: $pikachu;
+      border-radius: 72% 28% 70% 30% / 67% 30% 70% 33%;
+      transform: rotate(25deg);
+      overflow: hidden;
+      border: 1px solid $pika-stripes;
+      animation: pika-bounce 2s infinite;
+      @keyframes pika-bounce {
+        50% {
+          transform: translate(-1px, 1px) rotate(25deg);
+        }
+      }
+      .pika-stripes {
+        position: absolute;
+        width: 20px;
+        height: 35px;
+        left: 15px;
+        transform: rotate(20deg);
+        background-size: 10px 100%;
+        background-image: radial-gradient(
+          3px 30px at 5px 0px,
+          $pika-stripes 99%,
+          transparent 99%
+        );
+      }
+    }
+    .pika-head {
+      width: 40px;
+      height: 40px;
+      background-color: $pikachu;
+      border: 1px solid $pika-stripes;
+      position: absolute;
+      border-radius: 100%;
+      left: 32px;
+      border-radius: 50% 56% 50% 50% / 36% 63% 37% 64%;
+      border-left: 0;
+      top: -10px;
+      overflow: hidden;
+      animation: pika-head-bounce 2s infinite;
+      @keyframes pika-head-bounce {
+        50% {
+          transform: translate(-1px, 1px) rotate(-5deg);
+        }
+      }
+      .pika-face {
+        position: absolute;
+        width: 40px;
+        height: 30px;
+        left: 5px;
+        top: 10px;
+        background-image: radial-gradient(
+          5px 5px at 5px 80%,
+          $pika-cheeks 99%,
+          transparent 99%
+        );
+        .nose {
+          width: 4px;
+          height: 2px;
+          position: absolute;
+          background-color: black;
+          left: 50%;
+          top: 50%;
+          border-radius: 100%;
+        }
+        .eyes {
+          width: 75%;
+          height: 7px;
+          display: flex;
+          justify-content: space-between;
+          position: absolute;
+          top: 5px;
+          left: 5px;
+          transform: rotate(-10deg);
+          &:before,
+          &:after {
+            content: '';
+            width: 7px;
+            height: 100%;
+            background-color: black;
+            border-radius: 100%;
+            border: 1px solid black;
+            background-image: radial-gradient(
+              2px 2px at 70% 2px,
+              white 99%,
+              transparent 99%
+            );
+            animation: blink 2s infinite;
+          }
+        }
+        .mouth {
+          width: 12px;
+          height: 6px;
+          display: flex;
+          position: absolute;
+          justify-content: space-between;
+          top: 50%;
+          left: 42%;
+          transform: rotate(-10deg);
+          &:before,
+          &:after {
+            content: '';
+            width: 6px;
+            height: 100%;
+            border-radius: 100%;
+            border-bottom: 1px solid black;
+          }
+        }
+      }
+    }
+    .pika-ears {
+      width: 40px;
+      height: 7px;
+      position: absolute;
+      left: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      top: -5px;
+      &:before,
+      &:after {
+        content: '';
+        width: 8px;
+        height: 30px;
+        background-color: $pikachu;
+        overflow: hidden;
+        border-radius: 100%;
+        border: 1px solid $pika-stripes;
+        border-bottom: 0;
+        background-size: 100% 10px;
+        background-repeat: no-repeat;
+        background-image: linear-gradient(black 99%, transparent 99%);
+      }
+      &:before {
+        transform: rotate(-35deg);
+        transform-origin: bottom right;
+        animation: pika-left-ear 2s infinite;
+      }
+      &:after {
+        z-index: -1;
+        transform-origin: bottom left;
+        animation: pika-right-ear 1s 0.1s infinite;
+      }
+      @keyframes pika-left-ear {
+        30% {
+          transform: rotate(-40deg);
+        }
+      }
+      @keyframes pika-right-ear {
+        50% {
+          transform: rotate(2deg);
+        }
+      }
+    }
+    .pika-legs {
+      position: absolute;
+      width: 8px;
+      height: 25px;
+      background-color: $pikachu;
+      border-radius: 100%;
+      top: 15px;
+      border: 1px solid $pika-stripes;
+      left: -2px;
+      transform: rotate(-25deg);
+      animation: pika-hind-leg 2s ease-in-out infinite;
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        background-color: $pikachu;
+        border: 1px solid $pika-stripes;
+        width: 8px;
+        height: 25px;
+        border-radius: 100%;
+      }
+      &:before {
+        width: 10px;
+        left: 30px;
+        top: 25px;
+        transform: rotate(-10deg);
+        animation: pika-hind-leg 2s ease-in-out infinite;
+      }
+      &:after {
+        width: 7px;
+        left: 53px;
+        top: 22px;
+        transform: rotate(-30deg);
+      }
+      @keyframes pika-hind-leg {
+        50% {
+          transform: rotate(-26deg);
+        }
+      }
+    }
+    .pika-tail {
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      animation: pikaWag 1s 0.5s infinite;
+      left: 5px;
+      transform-origin: bottom right;
+
+      @keyframes pikaWag {
+        30% {
+          transform: rotate(-20deg);
+        }
+        50% {
+          transform: rotate(20deg);
+        }
+      }
+      .tail-base {
+        position: absolute;
+        width: 8px;
+        height: 30px;
+        background-color: $pika-stripes;
+        top: -8px;
+        left: 2px;
+        background-size: 10px 30px;
+        background-image: radial-gradient(
+            5px 8px at 0px 0px,
+            $pikachu 99%,
+            transparent 99%
+          ),
+          radial-gradient(5px 8px at 9px 0px, $pikachu 99%, transparent 99%);
+        &:before,
+        &:after {
+          content: '';
+          position: absolute;
+          background-color: $pikachu;
+        }
+        &:before {
+          width: 15px;
+          height: 8px;
+          z-index: -1;
+          left: -10px;
+        }
+        &:after {
+          width: 20px;
+          height: 12px;
+          transform: rotate(90deg);
+          left: -15px;
+          top: -8px;
+        }
+      }
+      .tail-top {
+        position: absolute;
+        width: 25px;
+        height: 16px;
+        background-color: $pikachu;
+        top: -30px;
+        left: -22px;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        z-index: -1;
+      }
+    }
+  }
+
+  .eevee {
+    position: absolute;
+    width: 65px;
+    height: 40px;
+    // background-color: magenta;
+    left: 200px;
+    top: 100px;
+  }
+
+  .ev-head {
+    position: absolute;
+    width: 43px;
+    height: 40px;
+    background-color: $eevee;
+    border-radius: 90%;
+    z-index: 1;
+    animation: ev-head-bounce 2s ease-in-out infinite;
+    @keyframes ev-head-bounce {
+      50% {
+        transform: translate(1px, 1px) rotate(-3deg);
+      }
+    }
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      background-color: $eevee;
+      width: 25px;
+      height: 8px;
+      border-radius: 10px;
+    }
+    &:before {
+      transform: rotate(10deg);
+      top: -2px;
+    }
+    &:after {
+      top: 4px;
+      right: 20px;
+    }
+  }
+
+  .ev-ears {
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      background-color: $eevee;
+      width: 20px;
+      height: 40px;
+      border-top-left-radius: 100%;
+      border-bottom-right-radius: 100%;
+      bottom: 0;
+    }
+    &:before {
+      right: -10px;
+      bottom: -5px;
+      transform: rotate(15deg);
+      background-repeat: no-repeat;
+      background-image: radial-gradient(
+        ellipse 90% 90% at 90% 80%,
+        #b47442,
+        transparent
+      );
+      transform-origin: bottom left;
+      animation: ev-right-ear 3s ease-in-out infinite;
+    }
+    &:after {
+      transform: scaleX(-1) rotate(10deg) translateX(15px);
+      left: -2px;
+      background-image: radial-gradient(
+        ellipse 80% 90% at 90% 80%,
+        #ad8052,
+        #332011
+      );
+      box-sizing: border-box;
+      border: 3px solid $eevee;
+      transform-origin: bottom right;
+      animation: ev-left-ear 3s ease-in-out infinite;
+    }
+    @keyframes ev-left-ear {
+      30% {
+        transform: scaleX(-1) rotate(20deg) translateX(15px);
+      }
+    }
+    @keyframes ev-right-ear {
+      50% {
+        transform: rotate(1deg);
+      }
+    }
+  }
+
+  .ev-body {
+    position: absolute;
+    width: 50px;
+    height: 28px;
+    background-color: $eevee;
+    top: 30px;
+    left: 10px;
+    border-radius: 50%;
+    transform: rotate(13deg);
+    z-index: 2;
+    animation: ev-bounce 2s ease-in-out infinite;
+    @keyframes ev-bounce {
+      50% {
+        transform: translate(1px, 1px) rotate(10deg);
+      }
+    }
+    .ev-fur {
+      position: absolute;
+      background-color: darken($ev-fur, 5%);
+      width: 22px;
+      height: 22px;
+      border-radius: 100%;
+      left: -10px;
+      top: 2px;
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        border-radius: 100%;
+      }
+      &:before {
+        background-color: $ev-fur;
+        width: 26px;
+        height: 26px;
+        border-radius: 100%;
+        z-index: 3;
+        left: 12px;
+        top: -10px;
+      }
+      &:after {
+        width: 20px;
+        height: 20px;
+        background-color: darken($ev-fur, 10%);
+        left: 33px;
+        top: -8px;
+        z-index: -1;
+      }
+    }
+  }
+
+  .ev-legs {
+    position: absolute;
+    width: 7px;
+    height: 18px;
+    background-color: $eevee;
+    border-radius: 100%;
+    left: 49px;
+    top: 48px;
+    transform: rotate(30deg);
+    animation: ev-hind-leg 2s ease-in-out infinite;
+    @keyframes ev-hind-leg {
+      50% {
+        transform: rotate(27deg);
+      }
+    }
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      border-radius: 100%;
+      width: 8px;
+      background-color: $eevee;
+    }
+    &:before {
+      height: 22px;
+      right: 38px;
+      top: 12px;
+      transform: rotate(15deg);
+    }
+    &:after {
+      height: 20px;
+      right: 10px;
+      top: 8px;
+    }
+  }
+
+  .ev-tail {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    background-color: $eevee;
+    overflow: hidden;
+    left: 50px;
+    top: 12px;
+    z-index: 2;
+    border-radius: 100%;
+    border-top-right-radius: 0;
+    transform-origin: bottom left;
+    animation: ev-wag 1s infinite;
+
+    @keyframes ev-wag {
+      30% {
+        transform: rotate(-20deg);
+      }
+      50% {
+        transform: rotate(20deg);
+      }
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: -10px;
+      left: 12px;
+      background-size: 100% 40%;
+      background-repeat: repeat-y;
+      background-image: radial-gradient(10px 8px, $ev-fur, 99%, transparent);
+      transform: rotate(140deg);
+    }
+  }
+  .trees {
+    width: 600px;
+    height: 300px;
+    position: absolute;
+    top: 150px;
+    left: 150px;
+
+    .tree {
+      width: 100px;
+      height: 150px;
+      text-align: center;
+      position: absolute;
+
+      &:nth-child(1) {
+        transform: scale(1.3) scaleX(0.9);
+        left: 70px;
+        top: 20px;
+        z-index: 2;
+      }
+      &:nth-child(2) {
+        transform: scale(1.5);
+        & > .layer {
+          border-color: lighten($pine-tree, 3%) transparent transparent
+            lighten($pine-tree, 3%);
+        }
+        & > .leaf {
+          background-color: lighten($pine-tree, 3%);
+        }
+      }
+      &:nth-child(3) {
+        transform: scaleY(1.7) scaleX(1.4);
+        left: 130px;
+        top: 5px;
+        & > .layer {
+          border-color: lighten($pine-tree, 1%) transparent transparent
+            lighten($pine-tree, 1%);
+        }
+        & > .leaf {
+          background-color: lighten($pine-tree, 1%);
+        }
+      }
+      &:nth-child(4) {
+        transform: scaleY(2) scaleX(1.8);
+        left: 580px;
+        top: 210px;
+        z-index: 3;
+        & > .layer {
+          border-color: lighten($pine-tree, 1%) transparent transparent
+            lighten($pine-tree, 1%);
+        }
+        & > .leaf {
+          background-color: lighten($pine-tree, 1%);
+        }
+      }
+      &:nth-child(5) {
+        transform: scaleY(1.7) scaleX(1.6);
+        left: 530px;
+        top: 280px;
+        z-index: 3;
+        & > .layer {
+          border-color: lighten($pine-tree, 5%) transparent transparent
+            lighten($pine-tree, 5%);
+        }
+        & > .leaf {
+          background-color: lighten($pine-tree, 5%);
+        }
+      }
+    }
+    .trunk {
+      width: 30px;
+      height: 20px;
+      background-color: $tree-trunk;
+      border-left: 0.09em solid black;
+      border-right: 0.09em solid black;
+      box-shadow: inset 0 10px 10px darken($tree-trunk, 25%);
+      z-index: 1;
+      transform: scale(0.9);
+      top: 65px;
+      left: 33px;
+      position: absolute;
+
+      // &:after {
+      //   content: "";
+      //   position: absolute;
+      //   width: 60px;
+      //   height: 28px;
+      //   background-color: rgba(black, 0.2);
+      //   top: 40px;
+      //   z-index: -2;
+      //   right: 15px;
+      //   border-radius: 100%;
+      // }
+
+      .roots {
+        position: relative;
+        z-index: -1;
+        top: 95%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 110%;
+        height: auto;
+        left: -5%;
+        .root {
+          flex: 1 1 0px;
+          background-color: darken($tree-trunk, 2%);
+
+          height: 15px;
+          margin: 0 -1px;
+          border-radius: 10px;
+
+          $angle: 30deg;
+          @for $i from 1 through 5 {
+            &:nth-child(#{$i}) {
+              transform: rotate($angle);
+            }
+            $angle: $angle - 15deg;
+          }
+          &:first-child {
+            box-shadow: -1px 1px darken($tree-trunk, 15%), -0.1em 1px black;
+          }
+          &:nth-child(n + 2):nth-child(-n + 4) {
+            box-shadow: 0px 1px darken($tree-trunk, 15%), 0em 1px black;
+          }
+          &:last-child {
+            box-shadow: 1px 1px darken($tree-trunk, 15%), 0.1em 1px black;
+          }
+        }
+      }
+    }
+    .layer {
+      border: 20px solid;
+      border-color: lighten($pine-tree, 5%) transparent transparent
+        lighten($pine-tree, 5%);
+      margin: auto;
+      transform-origin: center;
+      transform: rotate(45deg);
+      width: 0;
+      position: relative;
+      z-index: 2;
+    }
+    .leaf {
+      background-color: lighten($pine-tree, 5%);
+      position: absolute;
+      border-radius: 10px;
+      box-shadow: 0 2px darken($pine-tree, 5%);
+      z-index: 2;
+
+      &:nth-of-type(1) {
+        width: 8px;
+        height: 20px;
+        top: 10px;
+        left: 30px;
+        transform: rotate(60deg);
+      }
+
+      &:nth-of-type(2) {
+        width: 15px;
+        height: 30px;
+        top: 5px;
+        left: 30px;
+        transform: rotate(20deg);
+      }
+
+      &:nth-of-type(3) {
+        width: 13px;
+        height: 20px;
+        top: 8px;
+        right: 38px;
+        transform: rotate(-30deg);
+      }
+
+      &:nth-of-type(4) {
+        width: 12px;
+        height: 25px;
+        top: 5px;
+        right: 35px;
+        transform: rotate(-50deg);
+      }
+
+      &:nth-of-type(5) {
+        width: 12px;
+        height: 25px;
+        top: 33px;
+        right: 35px;
+        transform: rotate(-50deg);
+      }
+      &:nth-of-type(6) {
+        width: 8px;
+        height: 25px;
+        top: 32px;
+        right: 28px;
+        transform: rotate(-65deg);
+      }
+
+      &:nth-of-type(7) {
+        width: 10px;
+        height: 20px;
+        top: 34px;
+        left: 30px;
+        transform: rotate(60deg);
+      }
+
+      &:nth-of-type(8) {
+        width: 15px;
+        height: 20px;
+        top: 40px;
+        left: 25px;
+        transform: rotate(20deg);
+      }
+      &:nth-of-type(9) {
+        width: 8px;
+        height: 15px;
+        top: 44px;
+        left: 38px;
+        transform: rotate(0deg);
+        z-index: 3;
+      }
+      &:nth-of-type(10) {
+        width: 8px;
+        height: 15px;
+        top: 60px;
+        left: 13px;
+        transform: rotate(45deg);
+      }
+      &:nth-of-type(11) {
+        width: 15px;
+        height: 20px;
+        top: 60px;
+        left: 20px;
+        transform: rotate(55deg);
+      }
+      &:nth-of-type(12) {
+        width: 20px;
+        height: 20px;
+        top: 58px;
+        left: 32px;
+        border-radius: 100%;
+      }
+      &:nth-of-type(13) {
+        width: 20px;
+        height: 20px;
+        top: 58px;
+        left: 50px;
+        border-radius: 100%;
+      }
+      &:nth-of-type(14) {
+        width: 12px;
+        height: 25px;
+        top: 55px;
+        left: 60px;
+        transform: rotate(-50deg);
+      }
+
+      &:nth-of-type(15) {
+        width: 12px;
+        height: 25px;
+        top: 55px;
+        left: 70px;
+        transform: rotate(-50deg);
+      }
+      &:nth-of-type(16) {
+        width: 8px;
+        height: 25px;
+        top: 55px;
+        left: 78px;
+        transform: rotate(-45deg);
+      }
+      &:nth-of-type(17) {
+        width: 10px;
+        height: 20px;
+        top: 15px;
+        left: 25px;
+        transform: rotate(45deg);
+      }
+      &:nth-of-type(18) {
+        width: 8px;
+        height: 20px;
+        top: 10px;
+        left: 23px;
+        transform: rotate(45deg);
+      }
+      &:nth-of-type(19) {
+        width: 10px;
+        height: 15px;
+        top: 35px;
+        left: 15px;
+        transform: rotate(45deg);
+      }
+      &:nth-of-type(20) {
+        width: 12px;
+        height: 18px;
+        top: 35px;
+        left: 22px;
+        transform: rotate(45deg);
+      }
+      &:nth-of-type(21) {
+        width: 10px;
+        height: 20px;
+        top: 12px;
+        right: 28px;
+        transform: rotate(-45deg);
+      }
+
+      &:nth-of-type(22) {
+        width: 8px;
+        height: 20px;
+        top: 30px;
+        right: 20px;
+        transform: rotate(-45deg);
+      }
+
+      &:nth-of-type(23) {
+        width: 12px;
+        height: 25px;
+        top: 33px;
+        right: 35px;
+        transform: rotate(-50deg);
+      }
+      &:nth-of-type(24) {
+        width: 8px;
+        height: 20px;
+        top: 10px;
+        right: 24px;
+        transform: rotate(-44deg);
+      }
+      &:nth-of-type(25) {
+        width: 10px;
+        height: 25px;
+        top: 38px;
+        right: 18px;
+        transform: rotate(-50deg);
+      }
+
+      &:nth-of-type(26) {
+        width: 8px;
+        height: 25px;
+        top: -5px;
+        left: 32px;
+        transform: rotate(60deg);
+      }
+
+      &:nth-of-type(27) {
+        width: 6px;
+        height: 20px;
+        top: 0px;
+        left: 36px;
+        transform: rotate(40deg);
+      }
+
+      &:nth-of-type(28) {
+        width: 6px;
+        height: 20px;
+        top: -5px;
+        right: 40px;
+        transform: rotate(-40deg);
+        z-index: 3;
+      }
+
+      &:nth-of-type(29) {
+        width: 8px;
+        height: 25px;
+        top: -5px;
+        right: 35px;
+        transform: rotate(-65deg);
+      }
+    }
+
+    .layer:nth-of-type(2) {
+      transform: rotate(45deg) translate(-10px, -10px) scale(1.3);
+    }
+
+    .layer:nth-of-type(3) {
+      transform: rotate(45deg) translate(-20px, -20px) scale(1.5);
+    }
+  }
+
+  @mixin shrub-circle($size) {
+    width: #{$size};
+    height: #{$size};
+  }
+
+  .bushes {
+    width: 600px;
+    height: 300px;
+    position: absolute;
+    top: 150px;
+    left: 150px;
+
+    .bush,
+    .bush-leaf {
+      background-color: $bush;
+      border-radius: 100%;
+      position: absolute;
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        border-radius: 100%;
+        background-color: $bush;
+      }
+    }
+    .bush {
+      &:nth-child(1) {
+        width: 60px;
+        height: 60px;
+        left: -60px;
+        top: 30px;
+        &:before {
+          width: 90px;
+          height: 90px;
+          top: 40px;
+          left: -10px;
+          box-shadow: inset 2px -5px lighten($bush-shadow, 3%);
+        }
+        &:after {
+          width: 60px;
+          height: 60px;
+          left: 40px;
+          top: 55px;
+        }
+        & > .bush-leaf:nth-of-type(1) {
+          @include shrub-circle(50px);
+          left: 56px;
+          top: 15px;
+        }
+        & > .bush-leaf:nth-of-type(2) {
+          @include shrub-circle(30px);
+          left: 80px;
+          top: 50px;
+        }
+        & > .bush-leaf:nth-of-type(3) {
+          @include shrub-circle(20px);
+          top: 90px;
+        }
+        & > .bush-leaf:nth-of-type(4) {
+          @include shrub-circle(20px);
+          left: 65px;
+          top: 5px;
+        }
+        & > .bush-leaf:nth-of-type(5) {
+          @include shrub-circle(30px);
+          left: -15px;
+          top: 50px;
+        }
+        & > .bush-leaf:nth-of-type(6) {
+          @include shrub-circle(20px);
+          left: -10px;
+          top: 40px;
+        }
+        & > .bush-leaf:nth-of-type(7) {
+          @include shrub-circle(20px);
+          left: 50px;
+          top: 5px;
+        }
+        & > .bush-leaf:nth-of-type(8) {
+          @include shrub-circle(30px);
+          left: 20px;
+          top: 50px;
+          background-color: lighten($bush-shadow, 4%);
+          z-index: 2;
+        }
+        & > .bush-leaf:nth-of-type(9) {
+          @include shrub-circle(15px);
+          left: 30px;
+          top: 45px;
+          background-color: lighten($bush-shadow, 4%);
+          z-index: 2;
+        }
+        & > .bush-leaf:nth-of-type(10) {
+          @include shrub-circle(10px);
+          left: 20px;
+          top: 50px;
+          background-color: lighten($bush-shadow, 4%);
+          z-index: 2;
+        }
+        & > .bush-leaf:nth-of-type(11) {
+          @include shrub-circle(30px);
+          left: 30px;
+          top: 60px;
+          box-shadow: inset 2px 1px $bush-shadow;
+          z-index: 2;
+        }
+        & > .bush-leaf:nth-of-type(12) {
+          @include shrub-circle(15px);
+          left: 10px;
+          top: 60px;
+          box-shadow: inset -2px 1px $bush-shadow;
+          z-index: 2;
+        }
+        & > .bush-leaf:nth-of-type(13) {
+          @include shrub-circle(12px);
+          left: 22px;
+          top: 68px;
+          box-shadow: inset -1px 1px $bush-shadow;
+          z-index: 2;
+        }
+        & > .bush-leaf:nth-of-type(14) {
+          @include shrub-circle(15px);
+          background-color: lighten($bush-shadow, 3%);
+          top: 110px;
+          left: 10px;
+        }
+        & > .bush-leaf:nth-of-type(15) {
+          @include shrub-circle(20px);
+          background-color: lighten($bush-shadow, 3%);
+          top: 95px;
+          left: 0px;
+        }
+        & > .bush-leaf:nth-of-type(16) {
+          @include shrub-circle(15px);
+          background-color: lighten($bush-shadow, 3%);
+          top: 90px;
+          left: -5px;
+        }
+        & > .bush-leaf:nth-of-type(17) {
+          @include shrub-circle(15px);
+          background-color: lighten($bush-shadow, 3%);
+          top: 115px;
+          left: 23px;
+        }
+        & > .bush-leaf:nth-of-type(18) {
+          @include shrub-circle(20px);
+          background-color: lighten($bush-shadow, 3%);
+          top: 110px;
+          left: 30px;
+        }
+        & > .bush-leaf:nth-of-type(19) {
+          @include shrub-circle(30px);
+          background-color: lighten($bush-shadow, 3%);
+          top: 100px;
+          left: 40px;
+        }
+        & > .bush-leaf:nth-of-type(20) {
+          @include shrub-circle(30px);
+          top: 75px;
+          left: 85px;
+          z-index: 2;
+        }
+      }
+      &:nth-child(2) {
+        width: 50px;
+        height: 50px;
+        left: -80px;
+        top: 130px;
+        border: 1px solid $bush-shadow;
+        z-index: 3;
+        transform: scale(1.3);
+        &:before {
+          width: 60px;
+          height: 60px;
+          top: 30px;
+          left: 10px;
+          box-shadow: inset 2px -5px #3cbfa3;
+          border: 1px solid $bush;
+          border-bottom: 1px solid $bush-shadow;
+        }
+        &:after {
+          width: 40px;
+          height: 40px;
+          left: 40px;
+          top: 15px;
+          border-top: 1px solid $bush-shadow;
+          border-right: 1px solid $bush-shadow;
+          transform: rotate(20deg);
+        }
+        & > .bush-leaf:nth-of-type(1) {
+          @include shrub-circle(30px);
+          left: -10px;
+          top: 30px;
+          border-bottom: 1px solid $bush-shadow;
+          border-left: 1px solid $bush-shadow;
+        }
+        & > .bush-leaf:nth-of-type(2) {
+          @include shrub-circle(25px);
+          left: -5px;
+          top: 50px;
+          border-bottom: 1px solid $bush-shadow;
+          border-left: 1px solid $bush-shadow;
+        }
+        & > .bush-leaf:nth-of-type(3) {
+          @include shrub-circle(15px);
+          left: 40px;
+          top: 5px;
+          border-top: 1px solid $bush-shadow;
+          border-right: 1px solid $bush-shadow;
+        }
+        & > .bush-leaf:nth-of-type(4) {
+          @include shrub-circle(15px);
+          left: -8px;
+          top: 20px;
+          border-top: 1px solid $bush-shadow;
+          border-left: 1px solid $bush-shadow;
+        }
+        & > .bush-leaf:nth-of-type(5) {
+          @include shrub-circle(25px);
+          left: 20px;
+          top: 30px;
+          background-color: lighten($bush-shadow, 4%);
+          z-index: 2;
+        }
+        & > .bush-leaf:nth-of-type(6) {
+          @include shrub-circle(20px);
+          left: 35px;
+          top: 38px;
+          background-color: lighten($bush-shadow, 4%);
+          z-index: 2;
+        }
+        & > .bush-leaf:nth-of-type(7) {
+          @include shrub-circle(20px);
+          left: 40px;
+          top: 40px;
+          box-shadow: inset 2px 1px $bush-shadow;
+          z-index: 2;
+        }
+        & > .bush-leaf:nth-of-type(8) {
+          @include shrub-circle(15px);
+          left: 10px;
+          top: 30px;
+          box-shadow: inset -2px 1px $bush-shadow;
+          z-index: 2;
+        }
+        & > .bush-leaf:nth-of-type(9) {
+          @include shrub-circle(15px);
+          left: 20px;
+          top: 40px;
+          box-shadow: inset -1px 1px $bush-shadow;
+          z-index: 2;
+        }
+        & > .bush-leaf:nth-of-type(10) {
+          @include shrub-circle(10px);
+          left: 32px;
+          top: 50px;
+          box-shadow: inset -1px 1px $bush-shadow;
+          z-index: 2;
+        }
+      }
+      &:nth-child(3) {
+        width: 120px;
+        height: 120px;
+        left: 360px;
+        z-index: 2;
+        top: 130px;
+        transform: scale(0.8);
+        &:before {
+          width: 140px;
+          height: 140px;
+          left: 100px;
+        }
+        &:after {
+          width: 120px;
+          height: 120px;
+          left: 180px;
+          top: 70px;
+        }
+        & > .bush-leaf:nth-of-type(1) {
+          @include shrub-circle(100px);
+          left: 50px;
+          top: 90px;
+        }
+        & > .bush-leaf:nth-of-type(2) {
+          @include shrub-circle(80px);
+          left: 120px;
+          top: 90px;
+        }
+        & > .bush-leaf:nth-of-type(3) {
+          @include shrub-circle(60px);
+          left: 50px;
+          top: -40px;
+        }
+        & > .bush-leaf:nth-of-type(4) {
+          @include shrub-circle(50px);
+          left: 90px;
+          top: -20px;
+        }
+        & > .bush-leaf:nth-of-type(5) {
+          @include shrub-circle(35px);
+          left: 25px;
+          top: -20px;
+        }
+        & > .bush-leaf:nth-of-type(6) {
+          @include shrub-circle(60px);
+          left: 205px;
+          top: -30px;
+        }
+        & > .bush-leaf:nth-of-type(7) {
+          @include shrub-circle(60px);
+          left: 215px;
+          top: 20px;
+        }
+        & > .bush-leaf:nth-of-type(8) {
+          @include shrub-circle(30px);
+          left: 190px;
+          top: -30px;
+        }
+        & > .bush-leaf:nth-of-type(9) {
+          @include shrub-circle(20px);
+          left: 195px;
+          top: -10px;
+        }
+        & > .bush-leaf:nth-of-type(10) {
+          @include shrub-circle(20px);
+          left: 105px;
+          top: -35px;
+        }
+        & > .bush-leaf:nth-of-type(11) {
+          @include shrub-circle(10px);
+          left: 212px;
+          top: -32px;
+        }
+        & > .bush-leaf:nth-of-type(12) {
+          @include shrub-circle(16px);
+          left: 183px;
+          top: -8px;
+        }
+        & > .bush-leaf:nth-of-type(13) {
+          @include shrub-circle(16px);
+          left: 92px;
+          top: -40px;
+        }
+        & > .bush-leaf:nth-of-type(14) {
+          @include shrub-circle(50px);
+          left: -20px;
+          top: 55px;
+        }
+        & > .bush-leaf:nth-of-type(15) {
+          @include shrub-circle(25px);
+          left: -30px;
+          top: 45px;
+        }
+        & > .bush-leaf:nth-of-type(16) {
+          @include shrub-circle(20px);
+          left: -30px;
+          top: 60px;
+        }
+        & > .bush-leaf:nth-of-type(17) {
+          @include shrub-circle(30px);
+          left: -10px;
+          top: 40px;
+          border-top: 2px solid $bush-shadow;
+          z-index: 2;
+        }
+        & > .bush-leaf:nth-of-type(18) {
+          @include shrub-circle(20px);
+          left: 15px;
+          top: -5px;
+        }
+        & > .bush-leaf:nth-of-type(19) {
+          @include shrub-circle(18px);
+          left: 15px;
+          top: 5px;
+        }
+        & > .bush-leaf:nth-of-type(20) {
+          @include shrub-circle(18px);
+          left: -5px;
+          top: 30px;
+        }
+        & > .bush-leaf:nth-of-type(21) {
+          @include shrub-circle(20px);
+          left: 5px;
+          top: 15px;
+        }
+
+        & > .bush-shadows {
+          position: absolute;
+          width: 60px;
+          height: 60px;
+          left: 40px;
+          background-color: pink;
+
+          & > .bush-shadow:nth-of-type(1) {
+            @include shrub-circle(30px);
+            left: 40px;
+            top: 5px;
+            background-color: lighten($bush-shadow, 3%);
+          }
+          & > .bush-shadow:nth-of-type(2) {
+            @include shrub-circle(25px);
+            left: 60px;
+            top: 20px;
+            background-color: lighten($bush-shadow, 3%);
+          }
+          & > .bush-shadow:nth-of-type(3) {
+            @include shrub-circle(20px);
+            left: 35px;
+            top: 20px;
+            background-color: lighten($bush-shadow, 3%);
+          }
+          & > .bush-shadow:nth-of-type(4) {
+            @include shrub-circle(15px);
+            left: 65px;
+            top: 5px;
+            background-color: lighten($bush-shadow, 3%);
+          }
+          & > .bush-leaf:nth-of-type(26) {
+            @include shrub-circle(20px);
+            left: 40px;
+            top: 30px;
+            border: 1px solid transparent;
+            box-shadow: 0 -2px $bush-shadow;
+            transform: rotate(-10deg);
+          }
+          & > .bush-leaf:nth-of-type(27) {
+            @include shrub-circle(20px);
+            left: 70px;
+            top: 10px;
+            border: 1px solid transparent;
+            box-shadow: -2px -1px $bush-shadow;
+          }
+          & > .bush-leaf:nth-of-type(28) {
+            @include shrub-circle(10px);
+            left: 60px;
+            top: 30px;
+            border: 1px solid transparent;
+            box-shadow: -1px -1px $bush-shadow;
+          }
+        }
+        & > .bush-leaf:nth-of-type(22) {
+          @include shrub-circle(30px);
+          left: 40px;
+          top: 5px;
+          background-color: lighten($bush-shadow, 3%);
+        }
+        & > .bush-leaf:nth-of-type(23) {
+          @include shrub-circle(25px);
+          left: 60px;
+          top: 20px;
+          background-color: lighten($bush-shadow, 3%);
+        }
+        & > .bush-leaf:nth-of-type(24) {
+          @include shrub-circle(20px);
+          left: 35px;
+          top: 20px;
+          background-color: lighten($bush-shadow, 3%);
+        }
+        & > .bush-leaf:nth-of-type(25) {
+          @include shrub-circle(15px);
+          left: 65px;
+          top: 5px;
+          background-color: lighten($bush-shadow, 3%);
+        }
+        & > .bush-leaf:nth-of-type(26) {
+          @include shrub-circle(20px);
+          left: 40px;
+          top: 30px;
+          border: 1px solid transparent;
+          box-shadow: 0 -2px $bush-shadow;
+          transform: rotate(-10deg);
+        }
+        & > .bush-leaf:nth-of-type(27) {
+          @include shrub-circle(20px);
+          left: 70px;
+          top: 10px;
+          border: 1px solid transparent;
+          box-shadow: -2px -1px $bush-shadow;
+        }
+        & > .bush-leaf:nth-of-type(28) {
+          @include shrub-circle(10px);
+          left: 60px;
+          top: 30px;
+          border: 1px solid transparent;
+          box-shadow: -1px -1px $bush-shadow;
+        }
+        & > .bush-leaf:nth-of-type(29) {
+          @include shrub-circle(20px);
+          left: 70px;
+          top: 30px;
+        }
+        // right most bush shadows
+        & > .bush-leaf:nth-of-type(30) {
+          @include shrub-circle(30px);
+          left: 140px;
+          top: 40px;
+          background-color: lighten($bush-shadow, 3%);
+        }
+        & > .bush-leaf:nth-of-type(31) {
+          @include shrub-circle(20px);
+          left: 130px;
+          top: 50px;
+          background-color: lighten($bush-shadow, 3%);
+        }
+        & > .bush-leaf:nth-of-type(32) {
+          @include shrub-circle(20px);
+          left: 140px;
+          top: 60px;
+          background-color: lighten($bush-shadow, 3%);
+        }
+        & > .bush-leaf:nth-of-type(33) {
+          @include shrub-circle(30px);
+          left: 110px;
+          top: 50px;
+          border: 1px solid transparent;
+          box-shadow: 1px -1px $bush-shadow;
+        }
+        & > .bush-leaf:nth-of-type(34) {
+          @include shrub-circle(20px);
+          left: 140px;
+          top: 65px;
+          border: 1px solid transparent;
+          box-shadow: 0 -1px $bush-shadow;
+        }
+        & > .bush-leaf:nth-of-type(35) {
+          @include shrub-circle(20px);
+          left: 160px;
+          top: 55px;
+          border: 1px solid transparent;
+          box-shadow: -1px -1px $bush-shadow;
+        }
+        // outer bush leaves
+        & > .bush-leaf:nth-of-type(36) {
+          @include shrub-circle(40px);
+          left: 260px;
+          top: 65px;
+        }
+        & > .bush-leaf:nth-of-type(37) {
+          @include shrub-circle(30px);
+          left: 260px;
+          top: 40px;
+        }
+        & > .bush-leaf:nth-of-type(38) {
+          @include shrub-circle(15px);
+          left: 285px;
+          top: 60px;
+        }
+        & > .bush-leaf:nth-of-type(40) {
+          @include shrub-circle(50px);
+          left: 160px;
+          top: 150px;
+        }
+        // outer right leaves
+        & > .bush-leaf:nth-of-type(41) {
+          @include shrub-circle(20px);
+          left: 255px;
+          top: 15px;
+        }
+        & > .bush-leaf:nth-of-type(49) {
+          @include shrub-circle(20px);
+          left: 120px;
+          top: -25px;
+        }
+      }
+    }
+  }
+
+  .flower-bushes {
+    width: 600px;
+    height: 300px;
+    position: absolute;
+    top: 150px;
+    left: 150px;
+
+    .flower-bush,
+    .flower-bush-leaf {
+      z-index: 2;
+      background-color: $flower-bush;
+      border-radius: 100%;
+      position: absolute;
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        border-radius: 100%;
+        background-color: $flower-bush;
+      }
+    }
+
+    .flower {
+      position: absolute;
+      z-index: 3;
+    }
+    .petals {
+      width: 7px;
+      height: 18px;
+      background-color: $flower;
+      z-index: 3;
+      border-radius: 10px;
+      position: absolute;
+      box-shadow: 0 2px $flower-shadow, 0 -2px $flower-shadow;
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        background-color: $flower;
+        box-shadow: 0 2px $flower-shadow, 0 -2px $flower-shadow;
+        border-radius: 10px;
+        width: 7px;
+        height: 18px;
+      }
+      &:before {
+        transform: rotate(60deg);
+      }
+      &:after {
+        transform: rotate(-60deg);
+      }
+    }
+    .flower-bush {
+      @keyframes rotateFlowers {
+        50% {
+          transform: rotate(60deg);
+        }
+      }
+      &:nth-child(1) {
+        width: 40px;
+        height: 40px;
+        left: 0px;
+        top: 100px;
+        &:before {
+          width: 40px;
+          height: 40px;
+          top: 30px;
+          left: -10px;
+        }
+        &:after {
+          width: 40px;
+          height: 40px;
+          left: 20px;
+          top: 15px;
+        }
+        & > .flower-bush-leaf:nth-of-type(1) {
+          @include shrub-circle(20px);
+          left: 30px;
+          top: 0px;
+        }
+        & > .flower-bush-leaf:nth-of-type(2) {
+          @include shrub-circle(25px);
+          left: -10px;
+          top: 15px;
+        }
+        & > .flower-bush-leaf:nth-of-type(3) {
+          @include shrub-circle(35px);
+          left: 10px;
+          top: 40px;
+        }
+        & > .flower-bush-leaf:nth-of-type(4) {
+          @include shrub-circle(25px);
+          left: 40px;
+          top: 10px;
+        }
+        & > .flower:nth-child(7) {
+          left: 30px;
+          top: 30px;
+          transform: scale(0.7) rotate(20deg);
+        }
+        & > .flower:nth-child(8) {
+          left: 10px;
+          top: 50px;
+          transform: scale(0.8) rotate(50deg);
+        }
+        & > .flower:nth-child(9) {
+          left: 50px;
+          top: 40px;
+          transform: scale(0.7) rotate(20deg);
+        }
+        & > .flower:nth-child(10) {
+          left: 5px;
+          top: 20px;
+          transform: rotate(20deg);
+        }
+        & > .flower:nth-child(11) {
+          left: 40px;
+          top: 0px;
+          transform: rotate(20deg);
+        }
+      }
+      &:nth-child(2) {
+        width: 40px;
+        height: 40px;
+        left: 520px;
+        top: 360px;
+        z-index: 3;
+        transform: scale(1.4) rotate(60deg);
+        &:before {
+          width: 40px;
+          height: 40px;
+          top: 30px;
+          left: -10px;
+        }
+        &:after {
+          width: 40px;
+          height: 40px;
+          left: 20px;
+          top: 15px;
+        }
+        & > .flower-bush-leaf:nth-of-type(1) {
+          @include shrub-circle(20px);
+          left: 30px;
+          top: 0px;
+        }
+        & > .flower-bush-leaf:nth-of-type(2) {
+          @include shrub-circle(25px);
+          left: -10px;
+          top: 15px;
+        }
+        & > .flower-bush-leaf:nth-of-type(3) {
+          @include shrub-circle(35px);
+          left: 10px;
+          top: 40px;
+        }
+        & > .flower-bush-leaf:nth-of-type(4) {
+          @include shrub-circle(25px);
+          left: 40px;
+          top: 10px;
+        }
+        & > .flower:nth-child(7) {
+          left: 30px;
+          top: 30px;
+          transform: scale(0.7) rotate(20deg);
+        }
+        & > .flower:nth-child(8) {
+          left: 10px;
+          top: 50px;
+          transform: scale(0.8) rotate(50deg);
+        }
+        & > .flower:nth-child(9) {
+          left: 50px;
+          top: 40px;
+          transform: rotate(20deg);
+        }
+        & > .flower:nth-child(10) {
+          left: 5px;
+          top: 20px;
+          transform: rotate(20deg);
+        }
+        & > .flower:nth-child(11) {
+          left: 40px;
+          top: 0px;
+          transform: rotate(20deg);
+        }
+      }
+      &:nth-child(3) {
+        width: 40px;
+        height: 40px;
+        left: 330px;
+        top: 150px;
+        z-index: 2;
+        transform: scale(0.8) rotate(40deg);
+        box-shadow: 3px -5px 50px rgba(0, 0, 0, 0.1),
+          20px -10px 50px rgba(0, 0, 0, 0.1);
+        &:before {
+          width: 40px;
+          height: 40px;
+          top: 30px;
+          left: -10px;
+        }
+        &:after {
+          width: 40px;
+          height: 40px;
+          left: 20px;
+          top: 15px;
+        }
+        & > .flower-bush-leaf:nth-of-type(1) {
+          @include shrub-circle(20px);
+          left: 30px;
+          top: 0px;
+        }
+        & > .flower-bush-leaf:nth-of-type(2) {
+          @include shrub-circle(25px);
+          left: -10px;
+          top: 15px;
+        }
+        & > .flower-bush-leaf:nth-of-type(3) {
+          @include shrub-circle(35px);
+          left: 10px;
+          top: 40px;
+        }
+        & > .flower-bush-leaf:nth-of-type(4) {
+          @include shrub-circle(25px);
+          left: 40px;
+          top: 10px;
+        }
+        & > .flower:nth-child(7) {
+          left: 30px;
+          top: 30px;
+          transform: scale(0.7) rotate(20deg);
+        }
+        & > .flower:nth-child(8) {
+          left: 10px;
+          top: 50px;
+          transform: scale(0.8) rotate(50deg);
+        }
+        & > .flower:nth-child(9) {
+          left: 50px;
+          top: 40px;
+          transform: rotate(20deg);
+        }
+        & > .flower:nth-child(10) {
+          left: 5px;
+          top: 20px;
+          transform: rotate(20deg);
+        }
+        & > .flower:nth-child(11) {
+          left: 40px;
+          top: 0px;
+          transform: rotate(20deg);
+        }
+      }
+    }
+  }
+
+  @keyframes blink {
+    0% {
+      transform: scaleY(1);
+    }
+    18% {
+      transform: scaleY(1);
+    }
+    20% {
+      transform: scaleY(0);
+    }
+    25% {
+      transform: scaleY(1);
+    }
+    38% {
+      transform: scaleY(1);
+    }
+    40% {
+      transform: scaleY(0);
+    }
+    45% {
+      transform: scaleY(1);
+    }
+    80% {
+      transform: scaleY(1);
+    }
+  }
+}

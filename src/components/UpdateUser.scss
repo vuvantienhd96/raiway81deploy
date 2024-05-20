@@ -1,0 +1,17 @@
+@use 'common';
+.form {
+  display: flex;
+  justify-content: center;
+  background: common.$bg-content;
+  height: 100vh;
+  .input-form {
+    padding-top: 35px;
+    .item {
+      padding: 15px 0;
+    }
+    .title {
+      color: white;
+      font-weight: bold;
+    }
+  }
+}
