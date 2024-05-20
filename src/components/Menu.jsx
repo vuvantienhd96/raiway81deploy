@@ -1,10 +1,39 @@
 import './menu.css';
 import { Link, Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getAuth, signOut } from "firebase/auth";
+import { app } from '../../firebase';
 
 export const Menu = ({ menu, onShowFooter, showClound }) => {
+  // if exit authen ...
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+  const auth = getAuth(app);
+
+  useEffect(() => {
+    if(!token){
+      navigate('/sign-in');
+    }
+  }, token);
+
+  const signtOut = () => {
+    localStorage.clear();
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      navigate('/sign-in');
+    }).catch((error) => {
+      // An error happened.
+      alert(error)
+    });
+  }
+
   return (
     <div>
       <ul className="list-menu">
+        <li className="item" onClick={() => signtOut()}>
+         Logout
+        </li>
         <li className="item">
           <Link className="linkCss" to="/">
             Home

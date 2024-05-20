@@ -7,8 +7,10 @@ import Users from './components/Users.jsx';
 import { DetailUser } from './components/DetailUser.jsx';
 import { UpdateUser } from './components/UpdateUser.jsx';
 import { UpdateUserFormMik } from './components/Formik/UpdateUserFormMik.jsx';
+import { Login } from './components/login/Login.jsx';
 
 const router = createBrowserRouter([
+  { path: '/sign-in', element: <Login />},
   {
     path: '/',
     element: <Menu />,
